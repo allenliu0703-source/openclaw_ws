@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek - 探索未至之境</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1a 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #4fc3f7;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #fff;
+        }
+
+        .nav-btn {
+            padding: 8px 20px;
+            border: 1px solid #4fc3f7;
+            border-radius: 20px;
+            color: #4fc3f7 !important;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #4fc3f7;
+            color: #000 !important;
+        }
+
+        /* Banner */
+        .banner {
+            padding: 150px 60px 80px;
+            text-align: center;
+        }
+
+        .banner-notice {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(79, 195, 247, 0.1);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            padding: 10px 24px;
+            border-radius: 30px;
+            margin-bottom: 40px;
+            font-size: 14px;
+            color: #4fc3f7;
+        }
+
+        .banner h1 {
+            font-size: 72px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4fc3f7, #fff, #4fc3f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .banner h2 {
+            font-size: 28px;
+            color: #888;
+            font-weight: 400;
+            margin-bottom: 60px;
+        }
+
+        /* Cards */
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 0 60px;
+            margin-bottom: 100px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 50px 60px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .card:hover {
+            background: rgba(79, 195, 247, 0.1);
+            border-color: #4fc3f7;
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* Features */
+        .features {
+            padding: 80px 60px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .feature:hover {
+            background: rgba(79, 195, 247, 0.05);
+            border-color: rgba(79, 195, 247, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .feature h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #4fc3f7;
+        }
+
+        .feature p {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .footer-col h5 {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: #4fc3f7;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .banner h1 {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .banner h2 {
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .card {
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">🔵</div>
+            <span>deepseek</span>
+        </div>
+        <nav class="nav">
+            <a href="#">获取手机 App</a>
+            <a href="#" class="nav-btn">English</a>
+        </nav>
+    </header>
+
+    <section class="banner">
+        <div class="banner-notice">
+            🎉 DeepSeek-V3.2 正式版发布，强化 Agent 能力，融入思考推理
+        </div>
+        <h1>deepseek</h1>
+        <h2>探索未至之境</h2>
+        
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">💬</div>
+                <h3>开始对话</h3>
+                <p>与 DeepSeek-V3.2 免费对话<br>体验全新旗舰模型</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>API 开放平台</h3>
+                <p>调用 DeepSeek 最新模型<br>快速集成、流畅体验</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2>核心模型</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">🧠</div>
+                <h4>DeepSeek R1</h4>
+                <p>新一代推理模型，深度思考与复杂问题解决</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🚀</div>
+                <h4>DeepSeek V3</h4>
+                <p>旗舰级对话模型，全面升级性能表现</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💻</div>
+                <h4>DeepSeek Coder</h4>
+                <p>专业代码生成，理解与编写多语言代码</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">👁️</div>
+                <h4>DeepSeek VL</h4>
+                <p>多模态视觉理解，图像分析与文本推理</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔢</div>
+                <h4>DeepSeek Math</h4>
+                <p>数学专项模型，高精度计算与推理</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🌐</div>
+                <h4>DeepSeek LLM</h4>
+                <p>通用大语言模型，多场景智能对话</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <div class="logo-icon">🔵</div>
+                    <span>deepseek</span>
+                </div>
+                <p>© 2026 杭州深度求索人工智能基础技术研究有限公司<br>版权所有</p>
+            </div>
+            <div class="footer-col">
+                <h5>研究</h5>
+                <ul>
+                    <li><a href="#">DeepSeek R1</a></li>
+                    <li><a href="#">DeepSeek V3</a></li>
+                    <li><a href="#">DeepSeek Coder</a></li>
+                    <li><a href="#">DeepSeek VL</a></li>
+                    <li><a href="#">DeepSeek Math</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>产品</h5>
+                <ul>
+                    <li><a href="#">DeepSeek App</a></li>
+                    <li><a href="#">网页版</a></li>
+                    <li><a href="#">开放平台</a></li>
+                    <li><a href="#">API 价格</a></li>
+                    <li><a href="#">服务状态</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>法务</h5>
+                <ul>
+                    <li><a href="#">隐私政策</a></li>
+                    <li><a href="#">用户协议</a></li>
+                    <li><a href="#">反馈安全漏洞</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>关于我们</h5>
+                <ul>
+                    <li><a href="#">加入我们</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">博客</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            浙ICP备2023025841号 · 浙B2-20250178 · 浙公网安备 3301050201812号
+        </div>
+    </footer>
+</body>
+</html>
